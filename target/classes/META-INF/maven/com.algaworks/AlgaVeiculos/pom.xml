@@ -8,11 +8,13 @@
 	<description>Primeiros passos com JPA e Hibernate - Ebook JPA Guia Definitivo AlgaWorks</description>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.10.Final</version>
+			<version>5.6.5.Final</version>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
