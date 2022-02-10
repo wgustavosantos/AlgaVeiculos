@@ -1,6 +1,7 @@
 package service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
 
@@ -22,6 +23,7 @@ public class AdicionandoVeiculo {
 		veiculo.setAnoModelo(2020);
 		veiculo.setValor(new BigDecimal(90500));
 		veiculo.setTipoCombustivel(TipoCombustivel.ALCOOL);
+		veiculo.setDataCadastro(LocalDate.now());
 		em.persist(veiculo);
 		
 		em.getTransaction().commit();

@@ -1,5 +1,6 @@
 package dominio;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -38,6 +41,9 @@ public class Veiculo {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_combustivel", nullable = false)
 	private TipoCombustivel TipoCombustivel;
+	
+	@Column(name = "data_cadastro", nullable = false)
+	private LocalDate dataCadastro;
 	
 	public Veiculo () {
 		
@@ -106,6 +112,15 @@ public class Veiculo {
 
 	public void setTipoCombustivel(TipoCombustivel tipoCombustivel) {
 		TipoCombustivel = tipoCombustivel;
+	}
+	
+
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	@Override
