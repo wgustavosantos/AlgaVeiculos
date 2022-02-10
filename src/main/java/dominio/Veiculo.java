@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -46,6 +47,9 @@ public class Veiculo {
 	
 	@Transient
 	private String descricaoCompleta;
+	
+	@Lob
+	private String especificacoes;
 	
 	public Veiculo () {
 		
@@ -138,6 +142,16 @@ public class Veiculo {
 		this.dataCadastro = dataCadastro;
 	}
 	
+	public String getEspecificacoes() {
+		return especificacoes;
+	}
+
+
+	public void setEspecificacoes(String especificacoes) {
+		this.especificacoes = especificacoes;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
