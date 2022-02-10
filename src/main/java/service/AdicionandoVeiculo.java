@@ -3,13 +3,12 @@ package service;
 import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import dominio.Veiculo;
+import dominio.VeiculoPK;
 import util.JpaUtil;
 
-public class Main {
+public class AdicionandoVeiculo {
 	public static void main(String[] args) {
 		
 		EntityManager em = JpaUtil.getEm();
@@ -17,6 +16,7 @@ public class Main {
 		
 		Veiculo veiculo = new Veiculo();
 		
+		veiculo.setCodigo(new VeiculoPK("ABC-123", "Bragança"));
 		veiculo.setFabricante("Honda");
 		veiculo.setModelo("Civic");
 		veiculo.setAnoFabricacao(2020);

@@ -2,10 +2,8 @@ package dominio;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 
@@ -13,9 +11,8 @@ import javax.persistence.Table;
 @Table(name = "tab_veiculo")
 public class Veiculo {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	@EmbeddedId
+	private VeiculoPK codigo;
 	
 	@Column(length = 60, nullable = false)
 	private String fabricante;
@@ -45,11 +42,11 @@ public class Veiculo {
 		this.valor = valor;
 	}
 
-	public Long getCodigo() {
+	public VeiculoPK getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(VeiculoPK codigo) {
 		this.codigo = codigo;
 	}
 
@@ -117,5 +114,5 @@ public class Veiculo {
 			return false;
 		return true;
 	}
-	
+
 }
