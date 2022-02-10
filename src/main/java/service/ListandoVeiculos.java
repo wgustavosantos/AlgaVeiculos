@@ -13,11 +13,7 @@ public class ListandoVeiculos {
 
 		EntityManager em = JpaUtil.getEm();
 
-		String jpql = "SELECT v FROM Veiculo v";
-
-		Query query = em.createQuery(jpql);
-
-		List<Veiculo> veiculos = query.getResultList();
+		List<Veiculo> veiculos = em.createQuery("SELECT v FROM Veiculo v").getResultList();
 
 		for (Veiculo veiculo : veiculos) {
 			System.out.println(veiculo.getCodigo() + " - " 
@@ -25,7 +21,8 @@ public class ListandoVeiculos {
 					+ veiculo.getModelo() + ", ano " 
 					+ veiculo.getAnoFabricacao() + "/" 
 					+ veiculo.getAnoModelo() + " por " 
-					+ "R$" + veiculo.getValor());
+					+ "R$" + veiculo.getValor()
+					+ " Proprietario: " + veiculo.getProprietario().getNome());
 		}
 
 		em.close();

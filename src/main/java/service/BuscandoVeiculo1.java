@@ -12,8 +12,14 @@ public class BuscandoVeiculo1 {
 		EntityManager em = JpaUtil.getEm();
 		
 		Veiculo veiculo = em.find(Veiculo.class, 1L);
-		System.out.println("Veículo de código " + veiculo.getCodigo() 
-		+ " é um " + veiculo.getModelo());
+		System.out.println(veiculo.getCodigo() + " - " 
+				+ veiculo.getFabricante() + " " 
+				+ veiculo.getModelo() + ", ano " 
+				+ veiculo.getAnoFabricacao() + "/" 
+				+ veiculo.getAnoModelo() + " por " 
+				+ "R$" + veiculo.getValor()
+				+ " Proprietario: " + veiculo.getProprietario().getNome()
+				+ " Telefone: " + veiculo.getProprietario().getTelefone());
 		em.close();
 		JpaUtil.close();
 	}
