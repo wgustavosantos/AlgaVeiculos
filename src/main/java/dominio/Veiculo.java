@@ -51,6 +51,9 @@ public class Veiculo {
 	@Lob
 	private String especificacoes;
 	
+	@Lob
+	private byte[] foto;
+	
 	public Veiculo () {
 		
 	}
@@ -151,6 +154,13 @@ public class Veiculo {
 		this.especificacoes = especificacoes;
 	}
 
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
 
 	@Override
 	public int hashCode() {
