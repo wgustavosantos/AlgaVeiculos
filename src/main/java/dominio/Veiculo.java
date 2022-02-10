@@ -10,8 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -45,17 +44,33 @@ public class Veiculo {
 	@Column(name = "data_cadastro", nullable = false)
 	private LocalDate dataCadastro;
 	
+	@Transient
+	private String descricaoCompleta;
+	
 	public Veiculo () {
 		
 	}
-
-	public Veiculo(String fabricante, String modelo, Integer anoFabricacao, Integer anoModelo, BigDecimal valor) {
-		super();
+	
+	
+	public Veiculo(String fabricante, String modelo, Integer anoFabricacao, Integer anoModelo, BigDecimal valor,
+			TipoCombustivel tipoCombustivel, LocalDate dataCadastro, String descricaoCompleta) {
 		this.fabricante = fabricante;
 		this.modelo = modelo;
 		this.anoFabricacao = anoFabricacao;
 		this.anoModelo = anoModelo;
 		this.valor = valor;
+		TipoCombustivel = tipoCombustivel;
+		this.dataCadastro = dataCadastro;
+		this.descricaoCompleta = descricaoCompleta;
+	}
+
+
+	public String getDescricaoCompleta() {
+		return descricaoCompleta;
+	}
+
+	public void setDescricaoCompleta(String descricaoCompleta) {
+		this.descricaoCompleta = descricaoCompleta;
 	}
 
 	public Long getCodigo() {
@@ -122,7 +137,7 @@ public class Veiculo {
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
