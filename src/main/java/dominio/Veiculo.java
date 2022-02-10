@@ -2,8 +2,12 @@ package dominio;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 
@@ -11,8 +15,10 @@ import javax.persistence.Table;
 @Table(name = "tab_veiculo")
 public class Veiculo {
 	
-	@EmbeddedId
-	private VeiculoPK codigo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cod_veiculo")
+	private Long codigo;
 	
 	@Column(length = 60, nullable = false)
 	private String fabricante;
@@ -29,6 +35,10 @@ public class Veiculo {
 	@Column(precision = 10, scale = 2, nullable = true)
 	private BigDecimal valor;
 	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_combustivel", nullable = false)
+	private TipoCombustivel TipoCombustivel;
+	
 	public Veiculo () {
 		
 	}
@@ -42,11 +52,11 @@ public class Veiculo {
 		this.valor = valor;
 	}
 
-	public VeiculoPK getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(VeiculoPK codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -90,6 +100,14 @@ public class Veiculo {
 		this.valor = valor;
 	}
 
+	public TipoCombustivel getTipoCombustivel() {
+		return TipoCombustivel;
+	}
+
+	public void setTipoCombustivel(TipoCombustivel tipoCombustivel) {
+		TipoCombustivel = tipoCombustivel;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,5 +132,5 @@ public class Veiculo {
 			return false;
 		return true;
 	}
-
+	
 }

@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 
+import dominio.TipoCombustivel;
 import dominio.Veiculo;
-import dominio.VeiculoPK;
 import util.JpaUtil;
 
 public class AdicionandoVeiculo {
@@ -16,13 +16,12 @@ public class AdicionandoVeiculo {
 		
 		Veiculo veiculo = new Veiculo();
 		
-		veiculo.setCodigo(new VeiculoPK("ABC-123", "Bragança"));
 		veiculo.setFabricante("Honda");
 		veiculo.setModelo("Civic");
 		veiculo.setAnoFabricacao(2020);
 		veiculo.setAnoModelo(2020);
 		veiculo.setValor(new BigDecimal(90500));
-		
+		veiculo.setTipoCombustivel(TipoCombustivel.ALCOOL);
 		em.persist(veiculo);
 		
 		em.getTransaction().commit();
