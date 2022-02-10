@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,9 @@ public class Proprietario {
 
 	@Column(length = 255)
 	private String email;
+	
+	@OneToOne(mappedBy = "proprietario")
+	private Veiculo veiculo;
 
 	public Proprietario() {
 	}
@@ -31,6 +35,22 @@ public class Proprietario {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
+	}
+	
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	public String getNome() {
