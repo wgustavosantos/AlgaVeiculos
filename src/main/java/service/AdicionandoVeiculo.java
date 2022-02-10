@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.EntityManager;
 
+import dominio.Proprietario;
 import dominio.TipoCombustivel;
 import dominio.Veiculo;
 import util.JpaUtil;
@@ -34,7 +35,15 @@ public class AdicionandoVeiculo {
 		
 		veiculo.setEspecificacoes(especificacoes.toString());
 		
+		Proprietario proprietario = new Proprietario("Gustavo Santos", "91 9 93720104", null);
+		
+		
+		veiculo.setProprietario(proprietario);
+		
+		em.persist(proprietario);
 		em.persist(veiculo);
+		
+		
 		
 		em.getTransaction().commit();
 		
@@ -45,6 +54,8 @@ public class AdicionandoVeiculo {
 		System.out.println("Veículo: " + veiculo2.getModelo());
 		System.out.println("-------");
 		System.out.println(veiculo2.getEspecificacoes());
+		System.out.println("Nome do proprietário: " + veiculo2.getProprietario().getNome());
+		System.out.println("Telefone do proprietário: " + veiculo2.getProprietario().getTelefone());
 		
 		em.close();
 		JpaUtil.close();

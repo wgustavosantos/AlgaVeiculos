@@ -1,4 +1,5 @@
 package dominio;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -9,56 +10,60 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 
 @Entity
 @Table(name = "tab_veiculo")
 public class Veiculo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_veiculo")
 	private Long codigo;
-	
+
 	@Column(length = 60, nullable = false)
 	private String fabricante;
-	
+
 	@Column(length = 60, nullable = false)
 	private String modelo;
-	
+
 	@Column(name = "ano_fabricacao", nullable = false)
 	private Integer anoFabricacao;
-	
+
 	@Column(name = "ano_modelo")
 	private Integer anoModelo;
-	
+
 	@Column(precision = 10, scale = 2, nullable = true)
 	private BigDecimal valor;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_combustivel", nullable = false)
 	private TipoCombustivel TipoCombustivel;
-	
+
 	@Column(name = "data_cadastro", nullable = false)
 	private LocalDate dataCadastro;
-	
+
 	@Transient
 	private String descricaoCompleta;
-	
+
 	@Lob
 	private String especificacoes;
-	
+
 	@Lob
 	private byte[] foto;
-	
-	public Veiculo () {
-		
+
+	@OneToOne(optional = false) //notnull : default -> nullable = true
+	@JoinColumn(name = "cod_proprietario")
+	private Proprietario proprietario;
+
+	public Veiculo() {
+
 	}
-	
-	
+
 	public Veiculo(String fabricante, String modelo, Integer anoFabricacao, Integer anoModelo, BigDecimal valor,
 			TipoCombustivel tipoCombustivel, LocalDate dataCadastro, String descricaoCompleta) {
 		this.fabricante = fabricante;
@@ -70,7 +75,6 @@ public class Veiculo {
 		this.dataCadastro = dataCadastro;
 		this.descricaoCompleta = descricaoCompleta;
 	}
-
 
 	public String getDescricaoCompleta() {
 		return descricaoCompleta;
@@ -135,7 +139,6 @@ public class Veiculo {
 	public void setTipoCombustivel(TipoCombustivel tipoCombustivel) {
 		TipoCombustivel = tipoCombustivel;
 	}
-	
 
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
@@ -144,11 +147,10 @@ public class Veiculo {
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-	
+
 	public String getEspecificacoes() {
 		return especificacoes;
 	}
-
 
 	public void setEspecificacoes(String especificacoes) {
 		this.especificacoes = especificacoes;
@@ -160,6 +162,14 @@ public class Veiculo {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+
+	public Proprietario getProprietario() {
+		return proprietario;
+	}
+
+	public void setProprietario(Proprietario proprietario) {
+		this.proprietario = proprietario;
 	}
 
 	@Override
@@ -186,5 +196,5 @@ public class Veiculo {
 			return false;
 		return true;
 	}
-	
+
 }
