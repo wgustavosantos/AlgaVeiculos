@@ -2,9 +2,11 @@ package service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Iterator;
 
 import javax.persistence.EntityManager;
 
+import dominio.Acessorio;
 import dominio.Proprietario;
 import dominio.TipoCombustivel;
 import dominio.Veiculo;
@@ -45,9 +47,25 @@ public class AdicionandoVeiculo {
 		veiculo2.setTipoCombustivel(TipoCombustivel.ALCOOL);
 		veiculo2.setDataCadastro(LocalDate.now());
 
-		Proprietario proprietario = new Proprietario("Gustavo Santos", "91 9 93720104", null);
+		Acessorio roda = new Acessorio("Rodas de liga leve");
+		Acessorio sensor = new Acessorio("Sensores de estacionamento");
+		Acessorio mp3 = new Acessorio("MP3 player");
+		Acessorio pintura = new Acessorio("Pintura metalizada");
 
+		em.persist(roda);
+		em.persist(sensor);
+		em.persist(mp3);
+		em.persist(pintura);
+
+		veiculo.getAcessorios().add(roda);
+		veiculo.getAcessorios().add(sensor);
+
+		veiculo2.getAcessorios().add(mp3);
+		veiculo2.getAcessorios().add(pintura);
+
+		Proprietario proprietario = new Proprietario("Gustavo Santos", "91 9 93720104", null);
 		em.persist(proprietario);
+
 		veiculo.setProprietario(proprietario);
 		veiculo2.setProprietario(proprietario);
 
@@ -61,22 +79,23 @@ public class AdicionandoVeiculo {
 		buscarVeiculoPorId(em, 3L);
 		buscarVeiculoPorId(em, veiculo.getCodigo());
 		buscarVeiculoPorId(em, veiculo2.getCodigo());
-		
 
 		em.close();
 		JpaUtil.close();
 	}
-	
+
 	public static void buscarVeiculoPorId(EntityManager em, Long id) {
 		Veiculo veiculo = em.find(Veiculo.class, id);
-		System.out.println(veiculo.getCodigo() + " - " 
-				+ veiculo.getFabricante() + " " 
-				+ veiculo.getModelo() + ", ano " 
-				+ veiculo.getAnoFabricacao() + "/" 
-				+ veiculo.getAnoModelo() + " por " 
-				+ "R$" + veiculo.getValor()
-				+ " Proprietario: " + veiculo.getProprietario().getNome()
-				+ " Telefone: " + veiculo.getProprietario().getTelefone());
+		System.out.println(veiculo.getCodigo() + " - " + veiculo.getFabricante() + " " + veiculo.getModelo() + ", ano "
+				+ veiculo.getAnoFabricacao() + "/" + veiculo.getAnoModelo() + " por " + "R$" + veiculo.getValor()
+				+ " Proprietario: " + veiculo.getProprietario().getNome() + " Telefone: "
+				+ veiculo.getProprietario().getTelefone());
+
+		int i = 1;
+		for (Acessorio acessorio : veiculo.getAcessorios()) {
+			System.out.println("Acessorio " + i + " : " + acessorio.getDescricao());
+			i++;
+		}
 	}
 
 }

@@ -2,6 +2,8 @@ package dominio;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -59,6 +63,12 @@ public class Veiculo {
 	@ManyToOne(optional = false) //notnull : default -> nullable = true
 	@JoinColumn(name = "cod_proprietario")
 	private Proprietario proprietario;
+	
+	@ManyToMany
+	@JoinTable(name = "veiculo_acessorio",
+				joinColumns = @JoinColumn(name = "veiculo_cod"),
+				inverseJoinColumns = @JoinColumn(name = "acessorio_cod"))
+	private Set<Acessorio> acessorios = new HashSet<>();
 
 	public Veiculo() {
 
@@ -170,6 +180,15 @@ public class Veiculo {
 
 	public void setProprietario(Proprietario proprietario) {
 		this.proprietario = proprietario;
+	}
+	
+
+	public Set<Acessorio> getAcessorios() {
+		return acessorios;
+	}
+
+	public void setAcessorios(Set<Acessorio> acessorios) {
+		this.acessorios = acessorios;
 	}
 
 	@Override
