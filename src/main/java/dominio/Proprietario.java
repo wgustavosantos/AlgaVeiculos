@@ -1,11 +1,12 @@
 package dominio;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +26,8 @@ public class Proprietario {
 	@Column(length = 255)
 	private String email;
 	
-	@OneToOne(mappedBy = "proprietario")
-	private Veiculo veiculo;
+//	@OneToMany(mappedBy = "proprietario")
+//	private Set<Veiculo> veiculos;
 
 	public Proprietario() {
 	}
@@ -45,13 +46,13 @@ public class Proprietario {
 		this.codigo = codigo;
 	}
 
-	public Veiculo getVeiculo() {
-		return veiculo;
-	}
-
-	public void setVeiculo(Veiculo veiculo) {
-		this.veiculo = veiculo;
-	}
+//	public Set<Veiculo> getVeiculos() {
+//		return veiculos;
+//	}
+//
+//	public void setVeiculos(Set<Veiculo> veiculos) {
+//		this.veiculos = veiculos;
+//	}
 
 	public String getNome() {
 		return nome;

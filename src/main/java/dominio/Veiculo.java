@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -56,7 +56,7 @@ public class Veiculo {
 	@Lob
 	private byte[] foto;
 
-	@OneToOne(optional = false) //notnull : default -> nullable = true
+	@ManyToOne(optional = false) //notnull : default -> nullable = true
 	@JoinColumn(name = "cod_proprietario")
 	private Proprietario proprietario;
 

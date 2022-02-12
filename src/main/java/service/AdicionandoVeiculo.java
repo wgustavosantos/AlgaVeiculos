@@ -12,12 +12,12 @@ import util.JpaUtil;
 
 public class AdicionandoVeiculo {
 	public static void main(String[] args) {
-		
+
 		EntityManager em = JpaUtil.getEm();
 		em.getTransaction().begin();
-		
+
 		Veiculo veiculo = new Veiculo();
-		
+
 		veiculo.setFabricante("Honda");
 		veiculo.setModelo("Civic");
 		veiculo.setAnoFabricacao(2020);
@@ -25,38 +25,54 @@ public class AdicionandoVeiculo {
 		veiculo.setValor(new BigDecimal(90500));
 		veiculo.setTipoCombustivel(TipoCombustivel.ALCOOL);
 		veiculo.setDataCadastro(LocalDate.now());
-		
+
 		StringBuilder especificacoes = new StringBuilder();
 		especificacoes.append("Carro em excelente estado.\n");
 		especificacoes.append("Completo, menos ar.\n");
 		especificacoes.append("Primeiro dono, com manual de instrução ");
 		especificacoes.append("e todas as revisões feitas.\n");
 		especificacoes.append("IPVA pago, aceita financiamento.");
-		
+
 		veiculo.setEspecificacoes(especificacoes.toString());
-		
+
+		Veiculo veiculo2 = new Veiculo();
+
+		veiculo2.setFabricante("Fiesta");
+		veiculo2.setModelo("Ford");
+		veiculo2.setAnoFabricacao(2020);
+		veiculo2.setAnoModelo(2020);
+		veiculo2.setValor(new BigDecimal(90500));
+		veiculo2.setTipoCombustivel(TipoCombustivel.ALCOOL);
+		veiculo2.setDataCadastro(LocalDate.now());
+
 		Proprietario proprietario = new Proprietario("Gustavo Santos", "91 9 93720104", null);
-		
-		
-		veiculo.setProprietario(proprietario);
-		
+
 		em.persist(proprietario);
+		veiculo.setProprietario(proprietario);
+		veiculo2.setProprietario(proprietario);
+
 		em.persist(veiculo);
-		
-		
-		
+		em.persist(veiculo2);
+
 		em.getTransaction().commit();
-		
+
 		em.detach(veiculo);
-		
-		Veiculo veiculo2 = em.find(Veiculo.class, veiculo.getCodigo());
-		
-		System.out.println("Veículo: " + veiculo2.getModelo());
+
+		Veiculo v = em.find(Veiculo.class, veiculo.getCodigo());
+
+		System.out.println("Veículo: " + v.getModelo());
 		System.out.println("-------");
-		System.out.println(veiculo2.getEspecificacoes());
-		System.out.println("Nome do proprietário: " + veiculo2.getProprietario().getNome());
-		System.out.println("Telefone do proprietário: " + veiculo2.getProprietario().getTelefone());
-		
+		System.out.println(v.getEspecificacoes());
+		System.out.println("Nome do proprietário: " + v.getProprietario().getNome());
+		System.out.println("Telefone do proprietário: " + v.getProprietario().getTelefone());
+		System.out.println("-------");
+		Veiculo v2 = em.find(Veiculo.class, veiculo2.getCodigo());
+		System.out.println("Veículo: " + v2.getModelo());
+		System.out.println("-------");
+		System.out.println(v2.getEspecificacoes());
+		System.out.println("Nome do proprietário: " + v2.getProprietario().getNome());
+		System.out.println("Telefone do proprietário: " + v2.getProprietario().getTelefone());
+
 		em.close();
 		JpaUtil.close();
 	}
