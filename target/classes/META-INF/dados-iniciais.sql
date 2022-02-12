@@ -5,5 +5,5 @@ insert into proprietario (nome, telefone) values ('Ulisses Silva', '34 9 3333 33
 insert into tab_veiculo (fabricante, modelo, ano_fabricacao, ano_modelo, valor, tipo_combustivel, data_cadastro, cod_proprietario) values ('Fiat', 'Toro', 2020, 2020, 107000, 'DIESEL', sysdate(), 1);
 insert into tab_veiculo (fabricante, modelo, ano_fabricacao, ano_modelo, valor, tipo_combustivel, data_cadastro, cod_proprietario) values ('Ford', 'Fiesta', 2019, 2019, 42000, 'GASOLINA', sysdate(), 2);
 insert into tab_veiculo (fabricante, modelo, ano_fabricacao, ano_modelo, valor, tipo_combustivel, data_cadastro, cod_proprietario) values ('VW', 'Gol', 2019, 2020, 35000, 'BIOCOMBUSTIVEL', sysdate(), 3);
-
+insert into tab_veiculo (fabricante, modelo, ano_fabricacao, ano_modelo, valor, tipo_combustivel, data_cadastro, cod_proprietario) values ('Ford', 'Ka', 2018, 2019, 27000, 'BIOCOMBUSTIVEL', sysdate(), 1);
 

@@ -11,7 +11,7 @@ public class BuscandoVeiculo1 {
 		
 		EntityManager em = JpaUtil.getEm();
 		
-		Veiculo veiculo = em.find(Veiculo.class, 1L);
+		Veiculo veiculo = em.find(Veiculo.class, 2L);
 		System.out.println(veiculo.getCodigo() + " - " 
 				+ veiculo.getFabricante() + " " 
 				+ veiculo.getModelo() + ", ano " 

@@ -58,23 +58,25 @@ public class AdicionandoVeiculo {
 
 		em.detach(veiculo);
 
-		Veiculo v = em.find(Veiculo.class, veiculo.getCodigo());
-
-		System.out.println("Veículo: " + v.getModelo());
-		System.out.println("-------");
-		System.out.println(v.getEspecificacoes());
-		System.out.println("Nome do proprietário: " + v.getProprietario().getNome());
-		System.out.println("Telefone do proprietário: " + v.getProprietario().getTelefone());
-		System.out.println("-------");
-		Veiculo v2 = em.find(Veiculo.class, veiculo2.getCodigo());
-		System.out.println("Veículo: " + v2.getModelo());
-		System.out.println("-------");
-		System.out.println(v2.getEspecificacoes());
-		System.out.println("Nome do proprietário: " + v2.getProprietario().getNome());
-		System.out.println("Telefone do proprietário: " + v2.getProprietario().getTelefone());
+		buscarVeiculoPorId(em, 3L);
+		buscarVeiculoPorId(em, veiculo.getCodigo());
+		buscarVeiculoPorId(em, veiculo2.getCodigo());
+		
 
 		em.close();
 		JpaUtil.close();
+	}
+	
+	public static void buscarVeiculoPorId(EntityManager em, Long id) {
+		Veiculo veiculo = em.find(Veiculo.class, id);
+		System.out.println(veiculo.getCodigo() + " - " 
+				+ veiculo.getFabricante() + " " 
+				+ veiculo.getModelo() + ", ano " 
+				+ veiculo.getAnoFabricacao() + "/" 
+				+ veiculo.getAnoModelo() + " por " 
+				+ "R$" + veiculo.getValor()
+				+ " Proprietario: " + veiculo.getProprietario().getNome()
+				+ " Telefone: " + veiculo.getProprietario().getTelefone());
 	}
 
 }
